@@ -1,5 +1,5 @@
-# electron-boilerplate
+# SysTop Electron Application
 
 Taken from https://www.udemy.com/course/electron-from-scratch/
 
-Starting point for an electron application.
+system tray OS monitoring program
