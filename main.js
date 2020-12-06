@@ -16,7 +16,6 @@ function createMainWindow() {
     height: 600,
     icon: "./assets/icons/icon.png",
     resizable: isDev,
-    backgroundColor: "white",
     webPreferences: {
       nodeIntegration: true,
     },
