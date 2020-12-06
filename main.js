@@ -11,8 +11,8 @@ let mainWindow;
 
 function createMainWindow() {
   mainWindow = new BrowserWindow({
-    title: "APP NAME",
-    width: isDev ? 800 : 500,
+    title: "SysTop",
+    width: isDev ? 800 : 355,
     height: 600,
     icon: "./assets/icons/icon.png",
     resizable: isDev,
