@@ -4,6 +4,12 @@ const { cpu, mem, os } = require("node-os-utils");
 
 let cpuOverload = 5;
 
+notifyUser({
+  title: "CPU Overload",
+  body: `CPU is over ${cpuOverload}%`,
+  icon: path.join(__dirname, "img", "icon.png"),
+});
+
 // set model
 document.getElementById("cpu-model").innerText = cpu.model();
 
@@ -42,6 +48,9 @@ setInterval(() => {
   document.getElementById("sys-uptime").innerText = formatTime(+os.uptime());
 }, 2000);
 
+/*************************************************************************/
+// Functions
+/*************************************************************************/
 // Seconds to Time String
 function formatTime(seconds) {
   const d = Math.floor(seconds / (3600 * 24));
@@ -49,4 +58,9 @@ function formatTime(seconds) {
   const m = Math.floor((seconds % 3600) / 60);
   const s = Math.floor(seconds % 60);
   return `${d}days, ${h}hours, ${m}minutes, ${s}seconds`;
+}
+
+// send notification
+function notifyUser(options) {
+  new Notification(options.title, options);
 }
