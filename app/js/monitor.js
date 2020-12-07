@@ -2,13 +2,8 @@
 const path = require("path");
 const { cpu, mem, os } = require("node-os-utils");
 
-let cpuOverload = 5;
-
-notifyUser({
-  title: "CPU Overload",
-  body: `CPU is over ${cpuOverload}%`,
-  icon: path.join(__dirname, "img", "icon.png"),
-});
+let cpuOverload = 5; //%
+let alertFrequency = 1; //minutes
 
 // set model
 document.getElementById("cpu-model").innerText = cpu.model();
@@ -40,6 +35,15 @@ setInterval(() => {
     } else {
       document.getElementById("cpu-progress").style.background = "#30c88b";
     }
+    //check overload
+    if (info >= cpuOverload && runNotify(alertFrequency)) {
+      notifyUser({
+        title: "CPU Overload",
+        body: `CPU is over ${cpuOverload}%`,
+        icon: path.join(__dirname, "img", "icon.png"),
+      });
+      localStorage.setItem("lastNotify", +new Date());
+    }
   });
   cpu.free().then((info) => {
     document.getElementById("cpu-free").innerText =
@@ -63,4 +67,20 @@ function formatTime(seconds) {
 // send notification
 function notifyUser(options) {
   new Notification(options.title, options);
+}
+
+// time since notification
+function runNotify(frequency) {
+  if (localStorage.getItem("lastNotify") === null) {
+    // Store timestamp
+    localStorage.setItem("lastNotify", +new Date());
+    return true;
+  }
+  const notifyTime = new Date(parseInt(localStorage.getItem("lastNotify")));
+  const now = new Date();
+  const diffTime = Math.abs(now - notifyTime);
+  const minutesPassed = Math.ceil(diffTime / (1000 * 60));
+
+  if (minutesPassed > frequency) return true;
+  else return false;
 }
