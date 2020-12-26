@@ -15,6 +15,7 @@ class Store {
     this.data = parseDataFile(this.path, options.defaults);
   }
   get(key) {
+    // key is a string to pull the associated value from the JSON structure
     return this.data[key];
   }
   set(key, val) {
