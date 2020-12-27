@@ -69,6 +69,19 @@ app.on("ready", () => {
   });
 
   mainWindow.on("ready", () => (mainWindow = null));
+
+  tray.on("right-click", () => {
+    const contextMenu = Menu.buildFromTemplate([
+      {
+        label: "Quit",
+        click: () => {
+          app.isQuitting = true;
+          app.quit();
+        },
+      },
+    ]);
+    tray.popUpContextMenu(contextMenu);
+  });
 });
 
 const menu = [
