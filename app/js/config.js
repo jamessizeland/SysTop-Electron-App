@@ -1,5 +1,8 @@
-// import dependencies
-const { ipcRenderer } = require("electron");
+/**************************************************
+ * Requires these dependencies which are imported in the html file
+  const { ipcRenderer } = require("electron");
+ **************************************************/
+
 const settingsForm = document.getElementById("settings-form");
 
 // get settings from GUI
