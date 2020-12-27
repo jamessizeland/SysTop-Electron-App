@@ -19,5 +19,15 @@ settingsForm.addEventListener("submit", (e) => {
     cpuOverload,
     alertFrequency,
   });
-  console.log("settings saved");
+  showAlert("settings saved");
+
+  //show alert for settings
+  function showAlert(msg) {
+    const alert = document.getElementById("alert");
+    alert.classList.remove("hide");
+    alert.classList.add("alert");
+    alert.innerText = msg;
+
+    setTimeout(() => alert.classList.add("hide"), 3000); //hide again after 3 seconds
+  }
 });

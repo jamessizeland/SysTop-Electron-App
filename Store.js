@@ -11,6 +11,7 @@ class Store {
     const userDataPath = (electron.app || electron.remote.app).getPath(
       "userData"
     );
+    console.log("store path: " + userDataPath);
 
     this.path = path.join(userDataPath, options.configName + ".json");
     this.data = parseDataFile(this.path, options.defaults);
