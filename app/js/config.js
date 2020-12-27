@@ -4,6 +4,7 @@
  **************************************************/
 
 const settingsForm = document.getElementById("settings-form");
+const nav = document.getElementById("nav");
 
 // get settings from GUI
 ipcRenderer.on("settings:get", (e, settings) => {
@@ -23,14 +24,19 @@ settingsForm.addEventListener("submit", (e) => {
     alertFrequency,
   });
   showAlert("settings saved");
+});
 
-  //show alert for settings
-  function showAlert(msg) {
-    const alert = document.getElementById("alert");
-    alert.classList.remove("hide");
-    alert.classList.add("alert");
-    alert.innerText = msg;
+//show alert for settings
+function showAlert(msg) {
+  const alert = document.getElementById("alert");
+  alert.classList.remove("hide");
+  alert.classList.add("alert");
+  alert.innerText = msg;
 
-    setTimeout(() => alert.classList.add("hide"), 3000); //hide again after 3 seconds
-  }
+  setTimeout(() => alert.classList.add("hide"), 3000); //hide again after 3 seconds
+}
+
+// toggle nav
+ipcRenderer.on("nav:toggle", () => {
+  nav.classList.toggle("hide");
 });
