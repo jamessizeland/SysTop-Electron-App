@@ -54,6 +54,14 @@ app.on("ready", () => {
 
   const mainMenu = Menu.buildFromTemplate(menu);
   Menu.setApplicationMenu(mainMenu);
+  mainWindow.on("close", (e) => {
+    // prevent standard x behaviour to just hide rather than full quit
+    if (!app.isQuitting) {
+      e.preventDefault();
+      mainWindow.hide();
+    }
+    return true;
+  });
 
   // create tray icon
   const icon = path.join(__dirname, "assets", "icons", "tray_icon.png");
