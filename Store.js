@@ -6,6 +6,7 @@ const fs = require("fs");
 // define class
 class Store {
   constructor(options) {
+    console.log("Store was created");
     // 2 options incase we are using this from the renderer process or the main process
     const userDataPath = (electron.app || electron.remote.app).getPath(
       "userData"
@@ -33,3 +34,5 @@ function parseDataFile(filePath, defaults) {
     return defaults;
   }
 }
+
+module.exports = Store; // don't forget this line otherwise you can't import it into another module!
