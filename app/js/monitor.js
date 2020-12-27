@@ -1,9 +1,18 @@
-// import dependencies
-const path = require("path");
-const { cpu, mem, os } = require("node-os-utils");
+/**************************************************
+ * Requires these dependencies which are imported in the html file
+  const path = require("path");
+  const { cpu, mem, os } = require("node-os-utils");
+  const { ipcRenderer } = require("electron");
+ **************************************************/
 
-let cpuOverload = 5; //%
-let alertFrequency = 1; //minutes
+let cpuOverload; //%
+let alertFrequency; //minutes
+
+// get settings & values
+ipcRenderer.on("settings:get", (e, settings) => {
+  cpuOverload = +settings.cpuOverload;
+  alertFrequency = +settings.alertFrequency;
+});
 
 // set model
 document.getElementById("cpu-model").innerText = cpu.model();

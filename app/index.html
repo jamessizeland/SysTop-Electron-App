@@ -37,17 +37,16 @@
 
       <div class="content">
         <h1><i class="fas fa-cog"></i>Settings</h1>
-        <div id="alert" class="hide"></div>
-
         <form id="settings-form">
           <div class="form-control">
             <label for="cpu-overload">CPU Overload Warning %</label>
-            <input type="number" id=cup-overload>  
+            <input type="number" id=cpu-overload>  
           </div>
           <div class="form-control">
             <label for="alert-frequency">Alert Frequency (In Minutes)</label>
             <input type="number" id=alert-frequency>  
           </div>
+          <div id="alert" class="hide"></div>
           <input type="submit" value="save" class="btn">
         </form>
       </div>
@@ -68,7 +67,14 @@
         </li>
       </ul>
     </nav>
+    <script>
+      // import dependencies
+      const path = require("path");
+      const { cpu, mem, os } = require("node-os-utils");
+      const { ipcRenderer } = require("electron");
+    </script>
     <script src="js/tabs.js"></script>
     <script src="js/monitor.js"></script>
+    <script src="js/config.js"></script>
   </body>
 </html>
